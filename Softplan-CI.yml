@@ -1,0 +1,35 @@
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - checkout: self
+  - task: NodeTool@0
+    displayName: Use Node 16.x
+    inputs:
+      versionSpec: 16.x
+  - task: Npm@1
+    displayName: npm ci
+    inputs:
+      command: ci
+      workingDir: /home/vsts/work/1/s/
+      verbose: false
+  - task: Npm@1
+    displayName: npm install
+    inputs:
+      verbose: false
+  - task: Npm@1
+    displayName: npm custom
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: run test
+  - task: PublishPipelineArtifact@1
+    displayName: Publish Pipeline Artifact
+    condition: succeededOrFailed()
+    continueOnError: True
+    inputs:
+      path: cypress/reports/mochareports
+      artifactName: Report
+...
