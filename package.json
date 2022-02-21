@@ -1,0 +1,32 @@
+{
+  "name": "desafiosoft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "^9.5.0",
+    "cypress-multi-reporters": "^1.5.0",
+    "mocha": "^9.2.1",
+    "mochawesome": "^7.0.1",
+    "mochawesome-merge": "^4.2.1",
+    "mochawesome-report-generator": "^6.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "scripts": "cypress run",
+    "combine-reports": "mochawesome-merge cypress/reports/mocha/*.json > cypress/reports/mochareports/report.json",
+    "generate-report": "marge cypress/reports/mochareports/report.json -f report -o cypress/reports/mochareports -- inline",
+    "posttest": "npm run combine-reports && npm run generate-report",
+    "test": "npm run scripts || npm run posttest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/escoders/desafioSoft.git"
+  },
+  "author": "Gabriel Escodeiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/escoders/desafioSoft/issues"
+  },
+  "homepage": "https://github.com/escoders/desafioSoft#readme"
+}
